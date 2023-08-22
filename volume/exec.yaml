@@ -1,0 +1,16 @@
+spec:
+  containers:
+
+  - name: liveness
+    image: k8s.gcr.io/liveness
+    args:
+    - /bin/sh
+    - -c
+    - touch /tmp/healthy; sleep 30; rm -rf /tmp/healthy; sleep 600
+    livenessProbe:
+      exec:
+        command:
+        - cat
+        - /tmp/healthy
+      initialDelaySeconds: 3
+      periodSeconds: 3
